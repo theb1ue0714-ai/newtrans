@@ -142,7 +142,7 @@ impl Default for Settings {
             close_to_tray: true,
             hide_on_blur: false,
             join_wrapped_lines: true,
-            always_on_top: true,
+            always_on_top: false,
         }
     }
 }
@@ -334,6 +334,7 @@ mod tests {
         );
         assert!(settings.languages.back_translate);
         assert!(settings.autostart && settings.close_to_tray);
+        assert!(!settings.always_on_top);
         assert_eq!(settings.providers.order, ProviderId::ALL);
         assert_eq!(settings.providers.google_mode, GoogleMode::Free);
         settings.validate().unwrap();
