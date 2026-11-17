@@ -1,0 +1,28 @@
+[package]
+name = "newtrans-desktop"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "NewTrans desktop translator"
+
+[lib]
+name = "newtrans_desktop_lib"
+crate-type = ["lib", "cdylib", "staticlib"]
+
+[build-dependencies]
+tauri-build.workspace = true
+
+[dependencies]
+arboard.workspace = true
+device_query.workspace = true
+enigo.workspace = true
+newtrans-core = { path = "../../../crates/newtrans-core" }
+newtrans-providers = { path = "../../../crates/newtrans-providers" }
+serde.workspace = true
+serde_json.workspace = true
+tauri.workspace = true
+tauri-plugin-autostart.workspace = true
+tauri-plugin-global-shortcut.workspace = true
+tauri-plugin-single-instance.workspace = true
+thiserror.workspace = true
+tokio.workspace = true

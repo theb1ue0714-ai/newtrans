@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NewTrans 설정</title>
+  <link rel="stylesheet" href="app.css" />
+  <script src="common.js" defer></script>
+  <script src="settings.js" defer></script>
+</head>
+<body>
+  <main class="settings">
+    <h1>NewTrans 설정</h1>
+    <p class="muted" id="version"></p>
+
+    <section aria-labelledby="h-hotkeys">
+      <h2 id="h-hotkeys">단축키</h2>
+      <p class="muted">텍스트를 드래그한 뒤 단축키를 누르면 번역 창이 열립니다. 버튼을 누르고 원하는 키를 누르세요. 수식키를 두 번 빠르게 누르면 "두 번 누르기"로, 최대 3개 키 조합(예: Ctrl+Shift+Z)도 지정할 수 있습니다.</p>
+      <div class="row"><label>주 단축키</label><button class="recorder" id="hk-primary" data-slot="primary"></button><button data-clear="primary">사용 안 함</button><button data-default="primary">기본값 (Ctrl 두 번)</button></div>
+      <div class="row"><label>보조 단축키</label><button class="recorder" id="hk-secondary" data-slot="secondary"></button><button data-clear="secondary">사용 안 함</button><button data-default="secondary">기본값 (Ctrl+Q)</button></div>
+      <div class="row"><label for="interval">두 번 누르기 간격</label><input type="number" id="interval" min="150" max="1000" step="10" /> <span class="muted">ms (기본 350)</span></div>
+      <p class="muted" id="hk-message" role="status"></p>
+    </section>
+
+    <section aria-labelledby="h-lang">
+      <h2 id="h-lang">언어</h2>
+      <p class="muted">① 원문(언어 1) → ② 번역(언어 2) → ③ 재번역(다시 언어 1). 번역 창에서 언어 1·2를 바꾸면 그 값이 고정됩니다.</p>
+      <div class="row"><label for="src">언어 1 (원문)</label><select id="src"></select></div>
+      <div class="row"><label for="target">언어 2 (번역)</label><select id="target"></select></div>
+      <div class="row"><label for="fallback">대체 언어</label><select id="fallback"></select><span class="muted">원문이 언어 2와 같을 때 사용</span></div>
+      <div class="row"><label>재번역</label><label><input type="checkbox" id="back" /> 번역 결과를 언어 1로 다시 번역</label></div>
+      <div class="row"><label>사용할 언어</label><div class="checks" id="enabled"></div></div>
+    </section>
+
+    <section aria-labelledby="h-prov">
+      <h2 id="h-prov">번역 서비스</h2>
+      <div class="row"><label>탭</label><div class="checks" id="providers"></div></div>
+      <div class="row"><label for="default-tab">기본 탭</label><select id="default-tab"></select></div>
+      <div class="row"><label for="google-mode">Google 방식</label>
+        <select id="google-mode"><option value="free">무료 (키 없음)</option><option value="cloud">Cloud Translation API (내 키)</option></select></div>
+      <div class="row"><label for="timeout">요청 제한 시간</label><input type="number" id="timeout" min="3" max="60" /> <span class="muted">초</span></div>
+    </section>
+
+    <section aria-labelledby="h-keys">
+      <h2 id="h-keys">API 키</h2>
+      <p class="muted">키는 이 컴퓨터의 별도 파일(본인 계정만 읽기 가능)에만 저장되고 다른 곳으로 전송되지 않습니다. 비워 두고 저장하면 기존 키가 유지되고, "삭제"를 누르면 지워집니다.</p>
+      <div class="row"><label for="deepl">DeepL API 키</label><input type="password" id="deepl" autocomplete="off" placeholder="xxxxxxxx-....:fx" /><button data-verify="deepl">확인</button><button data-remove="deepl_api_key">삭제</button><span id="st-deepl" class="muted"></span></div>
+      <p class="muted">무료: deepl.com → API 플랜 "DeepL API Free" 가입(월 50만 자) → 계정 → API 키. ":fx"로 끝나는 키가 무료 키입니다.</p>
+      <div class="row"><label for="papago-id">Papago Client ID</label><input type="text" id="papago-id" autocomplete="off" /><span id="st-papago" class="muted"></span></div>
+      <div class="row"><label for="papago-secret">Papago Client Secret</label><input type="password" id="papago-secret" autocomplete="off" /><button data-verify="papago">확인</button><button data-remove="papago">삭제</button></div>
+      <p class="muted">네이버 클라우드 플랫폼 콘솔 → AI Services → Papago Translation 이용 신청 → Application 등록 후 Client ID/Secret. 유료 서비스이므로 사용량 알림을 설정하세요.</p>
+      <div class="row"><label for="google-key">Google Cloud 키</label><input type="password" id="google-key" autocomplete="off" /><button data-verify="google">확인</button><button data-remove="google_api_key">삭제</button><span id="st-google" class="muted"></span></div>
+      <p class="muted">Google 방식을 "Cloud Translation API"로 바꿀 때만 필요합니다. 월 50만 자까지 무료 크레딧이 적용되며, 키를 Cloud Translation API로만 제한하세요.</p>
+      <p id="key-message" role="status"></p>
+    </section>
+
+    <section aria-labelledby="h-general">
+      <h2 id="h-general">일반</h2>
+      <div class="checks" style="flex-direction:column">
+        <label><input type="checkbox" id="autostart" /> 컴퓨터 시작 시 자동 실행 (트레이에서 백그라운드 실행)</label>
+        <label><input type="checkbox" id="on-top" /> 번역 창을 항상 위에 표시</label>
+        <label><input type="checkbox" id="blur" /> 다른 곳을 클릭하면 번역 창 숨기기</label>
+        <label><input type="checkbox" id="join" /> PDF 등에서 복사한 줄바꿈을 문장으로 합치기</label>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-diag">
+      <h2 id="h-diag">진단</h2>
+      <ul class="diag" id="diag"></ul>
+    </section>
+
+    <div class="footer"><button class="primary" id="save">저장</button><button id="close">닫기</button><span id="save-message" role="status"></span></div>
+  </main>
+</body>
+</html>

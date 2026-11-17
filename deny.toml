@@ -1,0 +1,35 @@
+[graph]
+all-features = true
+
+[advisories]
+yanked = "deny"
+# Tauri's Linux stack currently brings several RustSec-unmaintained crates
+# transitively with no safe upgrade path. Keep direct unmaintained dependencies
+# and every vulnerability/unsound advisory as errors.
+unmaintained = "workspace"
+
+[licenses]
+confidence-threshold = 0.8
+allow = [
+  "0BSD",
+  "Apache-2.0",
+  "Apache-2.0 WITH LLVM-exception",
+  "BSD-2-Clause",
+  "BSD-3-Clause",
+  "BSL-1.0",
+  "ISC",
+  "MIT",
+  "MPL-2.0",
+  "OpenSSL",
+  "Unicode-3.0",
+  "Zlib",
+]
+
+[bans]
+multiple-versions = "allow"
+wildcards = "deny"
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]

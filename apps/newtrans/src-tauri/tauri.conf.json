@@ -1,0 +1,46 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "NewTrans",
+  "version": "0.1.0",
+  "identifier": "app.newtrans.desktop",
+  "build": {
+    "frontendDist": "../ui"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "label": "popup",
+        "title": "NewTrans",
+        "url": "popup.html",
+        "width": 560,
+        "height": 540,
+        "minWidth": 380,
+        "minHeight": 320,
+        "visible": false,
+        "alwaysOnTop": true,
+        "skipTaskbar": false
+      },
+      {
+        "label": "settings",
+        "title": "NewTrans 설정",
+        "url": "settings.html",
+        "width": 760,
+        "height": 720,
+        "visible": false
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; connect-src 'self' ipc: http://ipc.localhost; img-src 'self' data:; style-src 'self'; script-src 'self'"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "category": "Productivity",
+    "shortDescription": "Select text, press Ctrl twice, compare Google, Papago and DeepL",
+    "longDescription": "NewTrans translates selected text from any application and shows Google, Papago and DeepL results side by side with a back-translation check.",
+    "icon": ["icons/32x32.png", "icons/128x128.png", "icons/128x128@2x.png", "icons/icon.icns", "icons/icon.ico", "icons/icon.png"],
+    "windows": { "nsis": { "installMode": "currentUser" } }
+  }
+}

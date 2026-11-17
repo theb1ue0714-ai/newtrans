@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NewTrans</title>
+  <link rel="stylesheet" href="app.css" />
+  <script src="common.js" defer></script>
+  <script src="popup.js" defer></script>
+</head>
+<body>
+  <main class="popup">
+    <div class="topbar">
+      <div class="tabs" role="tablist" aria-label="번역 서비스" id="tabs"></div>
+      <button class="icon" id="settings-btn" title="설정" aria-label="설정">⚙</button>
+      <button class="icon" id="close-btn" title="닫기 (Esc)" aria-label="닫기">✕</button>
+    </div>
+    <div class="langbar">
+      <label class="sr-only" for="lang1">언어 1 (원문)</label>
+      <select id="lang1" title="언어 1 — 원문"></select>
+      <button class="icon" id="swap-btn" title="언어 바꾸기 (Ctrl+I)" aria-label="언어 바꾸기">⇄</button>
+      <label class="sr-only" for="lang2">언어 2 (번역)</label>
+      <select id="lang2" title="언어 2 — 번역"></select>
+      <span class="detected muted" id="detected"></span>
+    </div>
+    <div class="panes" role="tabpanel" id="panel">
+      <section class="pane">
+        <header><strong>① 원문</strong><span id="src-lang"></span>
+          <span class="actions"><button data-speak="source">🔊 듣기</button><button data-copy="source">복사</button><button id="translate-btn" title="Ctrl+Enter">번역</button></span>
+        </header>
+        <textarea class="body" id="source" spellcheck="false" placeholder="텍스트를 선택하고 Ctrl을 두 번 누르거나, 여기에 입력 후 Ctrl+Enter"></textarea>
+      </section>
+      <section class="pane result">
+        <header><strong>② 번역</strong><span id="mid-lang"></span>
+          <span class="actions"><button data-speak="translation">🔊 듣기</button><button data-copy="translation">복사</button></span>
+        </header>
+        <div class="body" id="translation" aria-live="polite"></div>
+      </section>
+      <section class="pane">
+        <header><strong>③ 재번역</strong><span id="back-lang"></span>
+          <span class="actions"><button data-speak="back">🔊 듣기</button><button data-copy="back">복사</button></span>
+        </header>
+        <div class="body" id="back"></div>
+      </section>
+    </div>
+    <div class="statusbar"><span id="status"></span><span style="margin-left:auto">Ctrl+Tab 탭 전환 · Alt+1~3 · Esc 닫기</span></div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,59 @@
+:root {
+  --bg: #f7f8fa; --panel: #ffffff; --text: #1b1f24; --muted: #5b6573; --line: #dde2e8;
+  --accent: #2563eb; --accent-weak: #e8efff; --danger: #c62828; --ok: #1b7f3b;
+  --radius: 8px; --font: "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", system-ui, sans-serif;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #15181d; --panel: #1e232a; --text: #e8ebef; --muted: #9aa4b1; --line: #313844; --accent: #6b9cff; --accent-weak: #22304d; --danger: #ff7a7a; --ok: #5fd08a; }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); font: 14px/1.5 var(--font); }
+button, select, input, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; border: 1px solid var(--line); background: var(--panel); border-radius: 6px; padding: 4px 10px; }
+button:hover { border-color: var(--accent); }
+button:focus-visible, select:focus-visible, textarea:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+select, input[type=text], input[type=password], input[type=number] { border: 1px solid var(--line); background: var(--panel); border-radius: 6px; padding: 4px 8px; }
+.muted { color: var(--muted); font-size: 12px; }
+.error { color: var(--danger); }
+.ok { color: var(--ok); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* Popup */
+.popup { display: flex; flex-direction: column; height: 100vh; }
+.topbar { display: flex; align-items: center; gap: 4px; padding: 8px 8px 0; border-bottom: 1px solid var(--line); }
+.tabs { display: flex; gap: 2px; flex: 1; }
+.tab { border: 1px solid transparent; border-bottom: none; border-radius: 6px 6px 0 0; background: transparent; padding: 6px 14px; color: var(--muted); }
+.tab[aria-selected=true] { background: var(--panel); border-color: var(--line); color: var(--text); font-weight: 600; margin-bottom: -1px; }
+.tab .key { font-size: 11px; color: var(--muted); margin-left: 4px; }
+.icon { border: none; background: transparent; padding: 4px 6px; font-size: 16px; color: var(--muted); }
+.langbar { display: flex; align-items: center; gap: 6px; padding: 8px 10px; background: var(--panel); }
+.langbar .detected { margin-left: auto; }
+.panes { flex: 1; display: grid; grid-template-rows: 1fr 1fr 1fr; gap: 8px; padding: 0 10px 8px; background: var(--panel); min-height: 0; }
+.pane { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: var(--radius); min-height: 0; }
+.pane header { display: flex; align-items: center; gap: 6px; padding: 4px 8px; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+.pane header strong { color: var(--text); font-weight: 600; }
+.pane header .actions { margin-left: auto; display: flex; gap: 2px; }
+.pane header .actions button { border: none; background: transparent; padding: 2px 6px; font-size: 12px; color: var(--muted); }
+.pane header .actions button:hover { color: var(--accent); }
+.pane .body { flex: 1; overflow: auto; padding: 6px 8px; white-space: pre-wrap; word-break: break-word; user-select: text; }
+.pane textarea.body { border: none; resize: none; background: transparent; outline: none; }
+.pane.result .body { font-size: 15px; }
+.statusbar { padding: 4px 10px 6px; font-size: 12px; color: var(--muted); background: var(--panel); display: flex; gap: 8px; }
+.loading::after { content: "번역 중…"; color: var(--muted); }
+
+/* Settings */
+.settings { max-width: 720px; margin: 0 auto; padding: 16px 20px 40px; }
+.settings h1 { font-size: 20px; margin: 0 0 4px; }
+.settings section { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; margin-top: 14px; }
+.settings h2 { font-size: 15px; margin: 0 0 10px; }
+.row { display: flex; align-items: center; gap: 10px; margin: 8px 0; flex-wrap: wrap; }
+.row > label:first-child { width: 150px; color: var(--muted); }
+.row input[type=text], .row input[type=password] { flex: 1; min-width: 220px; }
+.checks { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+.recorder { min-width: 180px; text-align: left; }
+.recorder.recording { border-color: var(--accent); background: var(--accent-weak); }
+.footer { position: sticky; bottom: 0; display: flex; gap: 8px; align-items: center; padding: 12px 0; background: var(--bg); }
+ul.diag { margin: 0; padding-left: 18px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }

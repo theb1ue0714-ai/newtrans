@@ -1,0 +1,11 @@
+[package]
+name = "newtrans-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Platform-neutral settings, language chain, and hotkey logic for NewTrans"
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
